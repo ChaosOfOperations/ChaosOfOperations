@@ -1,4 +1,61 @@
+$player-1-foreground: #ffffff
+$player-1-background: #000000
+
+/* P1 and P2 colors are inverted */
+$player-2-foreground: $player-1-background
+$player-2-background: $player-1-foreground
+
+$standard-spacing-small: 1rem
 $standard-spacing-large: 4rem
+
+$standard-border-thin: 0.2rem
+$standard-border-medium: 1rem
+$standard-border-thick: 2rem
+
+$standard-font-small: 1rem
+$standard-font-medium: 2.5rem
+$standard-font-large: 4rem
+
+
+
+/* General Page Layout */
 
 header
 	margin-top: $standard-spacing-large
+/* General Page Layout */
+
+
+
+/* Game Board */
+
+.game-board
+	text-align: center
+	font-size: $standard-font-medium
+
+.player-1
+	background-color: $player-1-background
+	color: $player-1-foreground
+	padding: $standard-spacing-small
+
+.player-2
+	background-color: $player-2-background
+	color: $player-2-foreground
+	padding: $standard-spacing-small
+
+.tile
+	display: inline-block
+	height: $standard-spacing-large
+	padding-right: $standard-spacing-small
+	padding-left: $standard-spacing-small
+	border-width: $standard-border-thin
+	border-style: solid
+
+.player-1 .tile
+	border-color: $player-1-foreground
+	background-color: $player-1-background
+
+.player-2 .tile
+	border-color: $player-2-foreground
+	background-color: $player-2-background
+
+/* Game Board */
