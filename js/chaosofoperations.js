@@ -3,6 +3,8 @@ var MIN_NUMBER_VALUE = 1;
 
 var DEFAULT_OPERATORS = ["^", "&times;", "&times;", "&divide;", "&divide;", "mod", "+", "+", "-", "-"];
 
+var currentPlayer = 1;
+
 $(document).ready
 (
 	function () 
@@ -48,7 +50,7 @@ function GenerateOperatorTilesP1()
 
 function AddNumberTileEventListeners()
 {
-
+	$(".player-" + currentPlayer + " .number-tiles .tile")
 }
 
 function AddOperatorTileEventListeners()
