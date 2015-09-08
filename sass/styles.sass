@@ -45,10 +45,12 @@ header
 .tile
 	display: inline-block
 	height: $standard-spacing-large
+	margin: $standard-spacing-small
 	padding-right: $standard-spacing-small
 	padding-left: $standard-spacing-small
 	border-width: $standard-border-thin
 	border-style: solid
+	cursor: pointer
 
 .player-1 .tile
 	border-color: $player-1-foreground
@@ -57,5 +59,8 @@ header
 .player-2 .tile
 	border-color: $player-2-foreground
 	background-color: $player-2-background
+
+.tile.selected
+	border-style: dotted
 
 /* Game Board */

@@ -22,10 +22,12 @@ header {
 .tile {
   display: inline-block;
   height: 4rem;
+  margin: 1rem;
   padding-right: 1rem;
   padding-left: 1rem;
   border-width: 0.2rem;
-  border-style: solid; }
+  border-style: solid;
+  cursor: pointer; }
 
 .player-1 .tile {
   border-color: #ffffff;
@@ -34,6 +36,9 @@ header {
 .player-2 .tile {
   border-color: #000000;
   background-color: #ffffff; }
+
+.tile.selected {
+  border-style: dotted; }
 
 /* Game Board */
 
