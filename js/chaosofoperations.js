@@ -37,7 +37,8 @@ function GenerateNumberTilesP1()
 
 function GetRandomTileNumber()
 {
-	return parseInt(Math.random() * MAX_NUMBER_VALUE + MIN_NUMBER_VALUE);
+	var range = MAX_NUMBER_VALUE - MIN_NUMBER_VALUE;
+	return parseInt(Math.random() * range + MIN_NUMBER_VALUE);
 }
 
 function GenerateOperatorTilesP1()
