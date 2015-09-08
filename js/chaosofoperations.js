@@ -22,8 +22,8 @@ function NewGame()
 	//build the operator tiles
 	GenerateOperatorTilesP1();
 	$(".player-2 .operator-tiles").append($(".player-1 .operator-tiles").html());
-	AddTileEventListeners('number');
-	AddTileEventListeners('operator');
+	GenerateTileEventListeners('number');
+	GenerateTileEventListeners('operator');
 	AddPlayedTilesEventListeners();
 }
 
@@ -57,21 +57,17 @@ function DisableTileEventListeners()
 	$(".tile").off( "click" );
 }
 
-function AddTileEventListeners(tileType)
+function GenerateTileEventListeners(tileType)
 {
 	$(".player-" + currentPlayer + " ." + tileType + "-tiles .tile").click(
-		function () {
-			SelectTile(tileType, this);
+		function ()
+		{
+			UserSelectTile(tileType, this);
 		}
 	);
 }
 
-function AddOperatorTileEventListeners()
-{
-	
-}
-
-function SelectTile(tileType, tileElement)
+function UserSelectTile(tileType, tileElement)
 {
 	$(".player-" + currentPlayer + " ." + tileType + "-tiles .tile").removeClass("selected");
 	$(tileElement).addClass( "selected" );
@@ -84,6 +80,7 @@ function AddPlayedTilesEventListeners()
 	);
 }
 
+//TODO refactor this function
 function DisplayPossibleMoves()
 {
 	$(".move-preview").remove();
@@ -104,24 +101,26 @@ function DisplayPossibleMoves()
 	$(this).after(previewOperatorAfter);
 	
 	$(".move-preview-before").click(
-		function () {
-			chooseMove("before");
+		function () 
+		{
+			UserChooseMove("before");
 		}
 	);
 	$(".move-preview-after").click(
-		function () {
-			chooseMove("after");
+		function () 
+		{
+			UserChooseMove("after");
 		}
 	);
 }
 
-function chooseMove(beforeOrAfter)
+function UserChooseMove(beforeOrAfter)
 {
 	$(".move-preview-" + beforeOrAfter).removeClass("selected");
 	$(".move-preview-" + beforeOrAfter).removeClass("move-preview");
 	$(".move-preview-" + beforeOrAfter).removeClass("move-preview-" + beforeOrAfter);
 	$(".selected").remove();
-	SwitchPlayers();
+	NextTurn();
 }
 
 function SwitchPlayers()
@@ -138,4 +137,11 @@ function SwitchPlayers()
 	{
 		alert("WHAT YOU DID? WHAT YOU DID NAAAAH? AHM GONNA BEAT YOU WITH MAH FIIIIISTS!");
 	}
+}
+
+function NextTurn()
+{
+	SwitchPlayers();
+	DisableTileEventListeners();
+	AddPlayedTilesEventListeners();
 }
