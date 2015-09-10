@@ -1,6 +1,6 @@
 var soundsDirectory = "./assets/sounds/";
 
-var MAX_NUMBER_VALUE = 100;
+var MAX_NUMBER_VALUE = 20;
 var MIN_NUMBER_VALUE = 1;
 
 var DEFAULT_OPERATORS = ["^", "&times;", "&times;", "&divide;", "&divide;", "mod", "+", "+", "-", "-"];
@@ -47,6 +47,7 @@ function NewGame()
 	GenerateOperatorTilesP2();
 	SetTileEventListeners();
 	EvaluateBothPlayerEquations();
+	AudioStartGame();
 }
 
 function GetRandomTileNumber()
@@ -105,7 +106,7 @@ function SetUnplayedTileEventListeners(tileType)
 		{
 			UserSelectTile(tileType, this);
 		}
-	);
+	).hover(AudioMouseOver);
 }
 
 function UserSelectTile(tileType, tileElement)
@@ -113,6 +114,7 @@ function UserSelectTile(tileType, tileElement)
 	$(".player-" + currentPlayer + " ." + tileType + "-tiles .tile").removeClass("selected");
 	$(".played-tiles .selected").remove();
 	$(tileElement).addClass( "selected" );
+	AudioSelectObject();
 }
 
 function SetPlayedTilesEventListeners()
@@ -299,6 +301,7 @@ function HandleWinCondition()
 	if (lastTileHasBeenPlayed)
 	{
 		$(".player-" + WhichPlayerIsWinning() + " .winner").removeClass("display-none");
+		AudioWinGame();
 	}
 }
 
@@ -351,7 +354,7 @@ function AudioPlayPiece()
 	PlayAudioFile("highlight_pleasant_03.wav");
 }
 
-function AudioPlayPiece()
+function AudioStartGame()
 {
 	PlayAudioFile("highlight_pleasant_06.wav");
 }
