@@ -10,8 +10,15 @@ $(document).ready
 	function () 
 	{
 		NewGame();
+		PopulatePlayerNames();
 	}
 );
+
+function PopulatePlayerNames()
+{
+	$(".player-2-name").html(prompt("Player One, Enter Your Name. (This player has the advantage.)"));
+	$(".player-1-name").html(prompt("Player Two, Enter Your Name."));
+}
 
 function NewGame()
 {
