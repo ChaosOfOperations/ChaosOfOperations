@@ -40,8 +40,6 @@ header h1 {
   padding: 1rem; }
 
 .player-1, .player-2 {
-  position: absolute;
-  top: 0;
   width: 100%; }
 
 .tile {

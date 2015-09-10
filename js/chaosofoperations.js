@@ -17,14 +17,13 @@ $(document).ready
 		NewGame();
 		PopulatePlayerNames();
 		SetPlayerColors();
-		SetP2TopToP1Height();
 	}
 );
 
 function PopulatePlayerNames()
 {
-	$(".player-2-name").html(prompt("Enter the name of the player with the least mathematical knowledge."));
 	$(".player-1-name").html(prompt("Enter the name of the player with the most mathematical knowledge."));
+	$(".player-2-name").html(prompt("Enter the name of the player with the least mathematical knowledge."));
 }
 
 function SetPlayerColors()
@@ -41,7 +40,6 @@ function NewGame()
 	GenerateOperatorTilesP2();
 	SetTileEventListeners();
 	EvaluateBothPlayerEquations();
-	SetP2TopToP1Height();
 }
 
 function GetRandomTileNumber()
@@ -52,7 +50,7 @@ function GetRandomTileNumber()
 
 function GenerateNumberTilesP1()
 {
-	for (var i = 0; i < 10; i++)
+	for (var i = 0; i < 40; i++)
 	{
 		$(".player-1 .number-tiles").append("<div class=\"tile number-tile\">" + GetRandomTileNumber() + "</div>");
 	}
@@ -180,19 +178,19 @@ function SwitchPlayers()
 {
 	if ( currentPlayer === 1 )
 	{
-		currentPlayer = 2;
 		$("body").css("background-color", playerTwoColor);
 		$("header").css("background-color", playerOneColor);
 		$("header h1").css("color", playerTwoColor);
 		SwitchPlayersElements();
+		currentPlayer = 2;
 	}
 	else if ( currentPlayer === 2 )
 	{
-		currentPlayer = 1;
 		$("body").css("background-color", playerOneColor);
 		$("header").css("background-color", playerTwoColor);
 		$("header h1").css("color", playerOneColor);
 		SwitchPlayersElements();
+		currentPlayer = 1;
 	}
 	else
 	{
@@ -202,23 +200,41 @@ function SwitchPlayers()
 
 function SwitchPlayersElements()
 {
+	$(".player-1, .player-2").css("position", "absolute");
+	
 	var playerOneHeight = $(".player-1").outerHeight();
 	var playerTwoHeight = $(".player-2").outerHeight();
 	var playerOneTop, playerTwoTop;
 	
-	if (parseInt($(".player-1").css("top").replace("px", "")) > 0)
-	{
-		playerOneTop = 0;
-		playerTwoTop = playerOneHeight;
-	}
-	else
+	if (currentPlayer === 1)
 	{
 		playerOneTop = playerTwoHeight;
 		playerTwoTop = 0;
+		$(".player-2").css("top", playerOneHeight);
+	}
+	else if (currentPlayer === 2)
+	{
+		playerOneTop = 0;
+		playerTwoTop = playerOneHeight;
+		$(".player-1").css("top", playerTwoHeight);
+	}
+	else
+	{
+		alert("Error: The current player is not set properly.");
+		return;
 	}
 	
 	AnimateSwitchPlayerElement(1, playerOneTop);
 	AnimateSwitchPlayerElement(2, playerTwoTop);
+	setTimeout(
+		function ()
+		{
+			//(currentPlayer%2+1) inverts 2 to 1 and vice versa
+			$(".player-" + currentPlayer).insertBefore($(".player-" + (currentPlayer%2+1)));
+			$(".player-1, .player-2").css("position", "initial");
+		},
+		playerSwitchAnimationInterval
+	);
 }
 
 function AnimateSwitchPlayerElement(whichPlayer, newTopValue)
@@ -261,9 +277,4 @@ function EvaluatePlayerEquation(playerNumber)
 	expressionToEvaluate = expressionToEvaluate.replace(/(\d+)\^(\d+)/g, "Math.pow($1, $2)");
 	expressionToEvaluate = expressionToEvaluate.replace(/Math.pow\((.+?)\)\^(\d+)/g, "Math.pow(Math.pow($1), $2)");
 	$(".player-" + playerNumber + " .equation-evaluation").html("= " + eval(expressionToEvaluate));
-}
-
-function SetP2TopToP1Height()
-{
-	$(".player-2").css("top", $(".player-1").outerHeight());
 }
