@@ -304,7 +304,7 @@ function HandleWinCondition()
 
 function WhichPlayerIsWinning()
 {
-	var playerOneIsWinning = EvaluatePlayerEquation(1) > EvaluatePlayerEquation(2);
+	var playerOneIsWinning = eval(EvaluatePlayerEquation(1) + ">" + EvaluatePlayerEquation(2));
 	if (playerOneIsWinning)
 	{
 		return 1;
