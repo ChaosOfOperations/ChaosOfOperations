@@ -5,10 +5,11 @@ $player-1-background: #000000
 $player-2-foreground: $player-1-background
 $player-2-background: $player-1-foreground
 
+$standard-spacing-tiny: 0.4rem
 $standard-spacing-small: 1rem
 $standard-spacing-large: 4rem
 
-$standard-border-thin: 0.2rem
+$standard-border-thin: 0.15rem
 $standard-border-medium: 1rem
 $standard-border-thick: 2rem
 
@@ -29,7 +30,6 @@ header
 /* Game Board */
 
 .game-board
-	text-align: center
 	font-size: $standard-font-medium
 
 .player-1
@@ -43,24 +43,25 @@ header
 	padding: $standard-spacing-small
 
 .tile
-	display: inline-block
-	height: $standard-spacing-large
-	margin: $standard-spacing-small
-	padding-right: $standard-spacing-small
-	padding-left: $standard-spacing-small
-	border-width: $standard-border-thin
-	border-style: solid
+	display: inline
 	cursor: pointer
-
-.player-1 .tile
-	border-color: $player-1-foreground
-	background-color: $player-1-background
-
-.player-2 .tile
-	border-color: $player-2-foreground
-	background-color: $player-2-background
+	padding-left: $standard-spacing-tiny
+	padding-right: $standard-spacing-tiny
 
 .tile.selected
-	border-style: dotted
+	border-style: solid
+	border-width: $standard-border-thin
+
+.player-1 .tile.selected
+	border-color: $player-1-foreground
+
+.player-2 .tile.selected
+	border-color: $player-2-foreground
+
+.played-tiles, .equation-evaluation
+	display: inline-block
+
+.equation-evaluation
+	margin-bottom: $standard-spacing-small
 
 /* Game Board */

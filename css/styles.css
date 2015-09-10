@@ -6,7 +6,6 @@ header {
 /* General Page Layout */
 /* Game Board */
 .game-board {
-  text-align: center;
   font-size: 2.5rem; }
 
 .player-1 {
@@ -20,25 +19,26 @@ header {
   padding: 1rem; }
 
 .tile {
-  display: inline-block;
-  height: 4rem;
-  margin: 1rem;
-  padding-right: 1rem;
-  padding-left: 1rem;
-  border-width: 0.2rem;
-  border-style: solid;
-  cursor: pointer; }
-
-.player-1 .tile {
-  border-color: #ffffff;
-  background-color: #000000; }
-
-.player-2 .tile {
-  border-color: #000000;
-  background-color: #ffffff; }
+  display: inline;
+  cursor: pointer;
+  padding-left: 0.4rem;
+  padding-right: 0.4rem; }
 
 .tile.selected {
-  border-style: dotted; }
+  border-style: solid;
+  border-width: 0.15rem; }
+
+.player-1 .tile.selected {
+  border-color: #ffffff; }
+
+.player-2 .tile.selected {
+  border-color: #000000; }
+
+.played-tiles, .equation-evaluation {
+  display: inline-block; }
+
+.equation-evaluation {
+  margin-bottom: 1rem; }
 
 /* Game Board */
 
