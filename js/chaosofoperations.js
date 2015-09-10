@@ -178,6 +178,7 @@ function UserChooseMove(beforeOrAfter)
 	$(".move-preview-" + beforeOrAfter).removeClass("move-preview");
 	$(".move-preview-" + beforeOrAfter).removeClass("move-preview-" + beforeOrAfter);
 	$(".selected").remove();
+	AudioPlayPiece();
 	NextTurn();
 }
 
@@ -329,3 +330,34 @@ function PlayAudioFile(audioFileName)
 {
 	$(".game-audio").attr("src", soundsDirectory + audioFileName);
 }
+
+function AudioSelectObject()
+{
+	PlayAudioFile("dice_popper_01.wav");
+}
+
+function AudioMouseOver()
+{
+	PlayAudioFile("typewriter_type_03.wav");
+}
+
+function AudioWinGame()
+{
+	PlayAudioFile("guitar_wank_07.wav");
+}
+
+function AudioPlayPiece()
+{
+	PlayAudioFile("highlight_pleasant_03.wav");
+}
+
+function AudioPlayPiece()
+{
+	PlayAudioFile("highlight_pleasant_06.wav");
+}
+
+function AudioSwitchPlayers()
+{
+	PlayAudioFile("texture_whoosh_02_medium_01.wav");
+}
+
