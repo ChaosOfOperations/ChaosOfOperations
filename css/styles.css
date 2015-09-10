@@ -1,12 +1,21 @@
 /* P1 and P2 colors are inverted */
 /* General Page Layout */
+body {
+  background-color: #000000; }
+
 header {
-  margin-top: 4rem; }
+  padding-top: 4rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  background-color: #ffffff; }
 
 /* General Page Layout */
 /* Game Board */
 .game-board {
   font-size: 2.5rem; }
+
+.player-1-name, .player-2-name {
+  padding-left: 0.4rem; }
 
 .player-1 {
   background-color: #000000;
