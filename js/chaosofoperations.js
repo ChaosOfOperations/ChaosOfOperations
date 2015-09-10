@@ -172,7 +172,7 @@ function SwitchPlayers()
 	if ( currentPlayer === 1 )
 	{
 		currentPlayer = 2;
-		$(".player-2").insertBefore($(".player-1"))
+		$(".player-2").insertBefore($(".player-1"));
 		$("body").css("background-color", playerTwoColor);
 		$("header").css("background-color", playerOneColor);
 		$("header h1").css("color", playerTwoColor);
@@ -180,7 +180,7 @@ function SwitchPlayers()
 	else if ( currentPlayer === 2 )
 	{
 		currentPlayer = 1;
-		$(".player-1").insertBefore($(".player-2"))
+		$(".player-1").insertBefore($(".player-2"));
 		$("body").css("background-color", playerOneColor);
 		$("header").css("background-color", playerTwoColor);
 		$("header h1").css("color", playerOneColor);
@@ -214,10 +214,11 @@ function EvaluatePlayerEquation(playerNumber)
 			humanReadableExpression += this.textContent.replace(/\s/g, "");
 		}
 	);
-	expressionToEvaluate = humanReadableExpression;
+	var expressionToEvaluate = humanReadableExpression;
 	expressionToEvaluate = expressionToEvaluate.replace(/×/g, "*");
 	expressionToEvaluate = expressionToEvaluate.replace(/÷/g, "/");
 	expressionToEvaluate = expressionToEvaluate.replace(/mod/g, "%");
 	expressionToEvaluate = expressionToEvaluate.replace(/(\d+)\^(\d+)/g, "Math.pow($1, $2)");
+	expressionToEvaluate = expressionToEvaluate.replace(/Math.pow\((.+?)\)\^(\d+)/g, "Math.pow(Math.pow($1), $2)");
 	$(".player-" + playerNumber + " .equation-evaluation").html("= " + eval(expressionToEvaluate));
 }
