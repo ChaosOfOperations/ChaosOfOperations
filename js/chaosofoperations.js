@@ -5,12 +5,17 @@ var DEFAULT_OPERATORS = ["^", "&times;", "&times;", "&divide;", "&divide;", "mod
 
 var currentPlayer = 1;
 
+var playerOneColor;
+var playerTwoColor;
+
 $(document).ready
 (
 	function () 
 	{
 		NewGame();
 		PopulatePlayerNames();
+		playerOneColor = $("body").css("background-color");
+		playerTwoColor = $("header").first().css("background-color");
 	}
 );
 
@@ -74,8 +79,8 @@ function DisableTileEventListeners()
 
 function SetTileEventListeners()
 {
-	SetUnplayedTileEventListeners('number');
-	SetUnplayedTileEventListeners('operator');
+	SetUnplayedTileEventListeners("number");
+	SetUnplayedTileEventListeners("operator");
 	SetPlayedTilesEventListeners();
 }
 
@@ -167,10 +172,18 @@ function SwitchPlayers()
 	if ( currentPlayer === 1 )
 	{
 		currentPlayer = 2;
+		$(".player-2").insertBefore($(".player-1"))
+		$("body").css("background-color", playerTwoColor);
+		$("header").css("background-color", playerOneColor);
+		$("header h1").css("color", playerTwoColor);
 	}
 	else if ( currentPlayer === 2 )
 	{
 		currentPlayer = 1;
+		$(".player-1").insertBefore($(".player-2"))
+		$("body").css("background-color", playerOneColor);
+		$("header").css("background-color", playerTwoColor);
+		$("header h1").css("color", playerOneColor);
 	}
 	else
 	{

@@ -9,6 +9,9 @@ header {
   padding-right: 1rem;
   background-color: #ffffff; }
 
+header h1 {
+  color: #000000; }
+
 /* General Page Layout */
 /* Game Board */
 .game-board {
