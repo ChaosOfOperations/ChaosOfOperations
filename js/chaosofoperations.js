@@ -97,6 +97,11 @@ function SetPlayedTilesEventListeners()
 
 function DisplayPossibleMoves()
 {
+	if (!CurrentPlayerSelectedTwoTiles())
+	{
+		return;
+	}
+	
 	$(".move-preview").remove();
 	var previewNumberBefore = $(".player-" + currentPlayer + " .number-tile.selected").clone();
 	var previewOperatorBefore = $(".player-" + currentPlayer + " .operator-tile.selected").clone();
@@ -114,16 +119,28 @@ function DisplayPossibleMoves()
 	$(this).after(previewNumberAfter);
 	$(this).after(previewOperatorAfter);
 	
-	$(".move-preview-before").click(
+	SetMovePreviewClickEventListener("before");
+	SetMovePreviewClickEventListener("after");
+}
+
+function CurrentPlayerSelectedTwoTiles()
+{
+	if (
+		$(".player-" + currentPlayer + " .number-tiles .selected").length +
+			$(".player-" + currentPlayer + " .operator-tiles .selected").length
+		== 2
+	) {
+		return true;
+	}
+	return false;
+}
+
+function SetMovePreviewClickEventListener(beforeOrAfter)
+{
+	$(".move-preview-" + beforeOrAfter).click(
 		function () 
 		{
-			UserChooseMove("before");
-		}
-	);
-	$(".move-preview-after").click(
-		function () 
-		{
-			UserChooseMove("after");
+			UserChooseMove(beforeOrAfter);
 		}
 	);
 }
