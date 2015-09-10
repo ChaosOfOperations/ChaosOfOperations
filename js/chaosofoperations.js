@@ -17,14 +17,17 @@ function NewGame()
 {
 	//Build the hand for player 1
 	GenerateNumberTilesP1();
-	//copy it for player 2
-	$(".player-2 .number-tiles").append($(".player-1 .number-tiles").html());
-	//build the operator tiles
+	GenerateNumberTilesP2();
+	//Generate the operator tiles
 	GenerateOperatorTilesP1();
-	$(".player-2 .operator-tiles").append($(".player-1 .operator-tiles").html());
-	GenerateTileEventListeners('number');
-	GenerateTileEventListeners('operator');
-	AddPlayedTilesEventListeners();
+	GenerateOperatorTilesP2();
+	SetTileEventListeners();
+}
+
+function GetRandomTileNumber()
+{
+	var range = MAX_NUMBER_VALUE - MIN_NUMBER_VALUE;
+	return parseInt(Math.random() * range + MIN_NUMBER_VALUE);
 }
 
 function GenerateNumberTilesP1()
@@ -35,10 +38,10 @@ function GenerateNumberTilesP1()
 	}
 }
 
-function GetRandomTileNumber()
+function GenerateNumberTilesP2()
 {
-	var range = MAX_NUMBER_VALUE - MIN_NUMBER_VALUE;
-	return parseInt(Math.random() * range + MIN_NUMBER_VALUE);
+	//clone player 1 number tiles into player 2 number tiles
+	$(".player-2 .number-tiles").append($(".player-1 .number-tiles").html());
 }
 
 function GenerateOperatorTilesP1()
@@ -52,12 +55,24 @@ function GenerateOperatorTilesP1()
 	);
 }
 
+function GenerateOperatorTilesP2()
+{
+	$(".player-2 .operator-tiles").append($(".player-1 .operator-tiles").html());
+}
+
 function DisableTileEventListeners()
 {
 	$(".tile").off( "click" );
 }
 
-function GenerateTileEventListeners(tileType)
+function SetTileEventListeners()
+{
+	SetUnplayedTileEventListeners('number');
+	SetUnplayedTileEventListeners('operator');
+	SetPlayedTilesEventListeners();
+}
+
+function SetUnplayedTileEventListeners(tileType)
 {
 	$(".player-" + currentPlayer + " ." + tileType + "-tiles .tile").click(
 		function ()
@@ -73,7 +88,7 @@ function UserSelectTile(tileType, tileElement)
 	$(tileElement).addClass( "selected" );
 }
 
-function AddPlayedTilesEventListeners()
+function SetPlayedTilesEventListeners()
 {
 	$(".player-" + currentPlayer + " .played-tiles .number-tile").hover(
 		DisplayPossibleMoves
@@ -143,5 +158,5 @@ function NextTurn()
 {
 	SwitchPlayers();
 	DisableTileEventListeners();
-	AddPlayedTilesEventListeners();
+	SetTileEventListeners();
 }
