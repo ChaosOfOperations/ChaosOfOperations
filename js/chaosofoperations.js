@@ -23,8 +23,8 @@ $(document).ready
 
 function PopulatePlayerNames()
 {
-	$(".player-2-name").html(prompt("Player One, Enter Your Name. (This player has the advantage.)"));
-	$(".player-1-name").html(prompt("Player Two, Enter Your Name."));
+	$(".player-2-name").html(prompt("Enter the name of the player with the least mathematical knowledge."));
+	$(".player-1-name").html(prompt("Enter the name of the player with the most mathematical knowledge."));
 }
 
 function NewGame()
