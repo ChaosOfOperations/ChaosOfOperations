@@ -1,3 +1,5 @@
+var soundsDirectory = "./assets/sounds/";
+
 var MAX_NUMBER_VALUE = 100;
 var MIN_NUMBER_VALUE = 1;
 
@@ -277,4 +279,9 @@ function EvaluatePlayerEquation(playerNumber)
 	expressionToEvaluate = expressionToEvaluate.replace(/(\d+)\^(\d+)/g, "Math.pow($1, $2)");
 	expressionToEvaluate = expressionToEvaluate.replace(/Math.pow\((.+?)\)\^(\d+)/g, "Math.pow(Math.pow($1), $2)");
 	$(".player-" + playerNumber + " .equation-evaluation").html("= " + eval(expressionToEvaluate));
+}
+
+function playAudioFile(audioFileName)
+{
+	$(".game-audio").attr("src", soundsDirectory + audioFileName);
 }
