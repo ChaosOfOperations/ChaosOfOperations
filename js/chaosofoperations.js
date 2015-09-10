@@ -321,8 +321,8 @@ function SetDebugState()
 	if (window.location.hash.match(/debug/))
 	{
 		debug = true;
+		DEFAULT_OPERATORS = ["+", "^"];
 	}
-	DEFAULT_OPERATORS = ["+", "^"];
 }
 
 
