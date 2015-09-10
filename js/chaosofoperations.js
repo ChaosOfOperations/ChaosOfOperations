@@ -12,12 +12,17 @@ var playerTwoColor;
 
 var playerSwitchAnimationInterval = 300;
 
+var debug = false;
+
 $(document).ready
 (
 	function () 
 	{
+		SetDebugState();
 		NewGame();
-		PopulatePlayerNames();
+		if (!debug) {
+			PopulatePlayerNames();
+		}
 		SetPlayerColors();
 	}
 );
@@ -52,7 +57,7 @@ function GetRandomTileNumber()
 
 function GenerateNumberTilesP1()
 {
-	for (var i = 0; i < 40; i++)
+	for (var i = 0; i < DEFAULT_OPERATORS.length; i++)
 	{
 		$(".player-1 .number-tiles").append("<div class=\"tile number-tile\">" + GetRandomTileNumber() + "</div>");
 	}
@@ -239,9 +244,9 @@ function SwitchPlayersElements()
 	);
 }
 
-function AnimateSwitchPlayerElement(whichPlayer, newTopValue)
+function AnimateSwitchPlayerElement(playerNumber, newTopValue)
 {
-	$(".player-" + whichPlayer).animate(
+	$(".player-" + playerNumber).animate(
 		{
 			"top": newTopValue
 		},
@@ -255,12 +260,13 @@ function NextTurn()
 	EvaluateBothPlayerEquations();
 	DisableTileEventListeners();
 	SetTileEventListeners();
+	HandleWinCondition();
 }
 
 function EvaluateBothPlayerEquations()
 {
-	EvaluatePlayerEquation(1);
-	EvaluatePlayerEquation(2);
+	DisplayEvaluatedPlayerEquation(1, EvaluatePlayerEquation(1));
+	DisplayEvaluatedPlayerEquation(2, EvaluatePlayerEquation(2));
 }
 
 function EvaluatePlayerEquation(playerNumber)
@@ -278,10 +284,48 @@ function EvaluatePlayerEquation(playerNumber)
 	expressionToEvaluate = expressionToEvaluate.replace(/mod/g, "%");
 	expressionToEvaluate = expressionToEvaluate.replace(/(\d+)\^(\d+)/g, "Math.pow($1, $2)");
 	expressionToEvaluate = expressionToEvaluate.replace(/Math.pow\((.+?)\)\^(\d+)/g, "Math.pow(Math.pow($1), $2)");
-	$(".player-" + playerNumber + " .equation-evaluation").html("= " + eval(expressionToEvaluate));
+	return expressionToEvaluate;
 }
 
-function playAudioFile(audioFileName)
+function DisplayEvaluatedPlayerEquation(playerNumber, equationToEvaluate)
+{
+	$(".player-" + playerNumber + " .equation-evaluation").html("= " + eval(equationToEvaluate));
+}
+
+function HandleWinCondition()
+{
+	var lastTileHasBeenPlayed = $(".player-2 .number-tiles .tile").length == 0;
+	if (lastTileHasBeenPlayed)
+	{
+		$(".player-" + WhichPlayerIsWinning() + " .winner").removeClass("display-none");
+	}
+}
+
+function WhichPlayerIsWinning()
+{
+	var playerOneIsWinning = EvaluatePlayerEquation(1) > EvaluatePlayerEquation(2);
+	if (playerOneIsWinning)
+	{
+		return 1;
+	}
+	else
+	{
+		return 2;
+	}
+}
+
+
+function SetDebugState()
+{
+	if (window.location.hash.match(/debug/))
+	{
+		debug = true;
+	}
+	DEFAULT_OPERATORS = ["+", "^"];
+}
+
+
+function PlayAudioFile(audioFileName)
 {
 	$(".game-audio").attr("src", soundsDirectory + audioFileName);
 }

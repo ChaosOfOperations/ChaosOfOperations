@@ -65,5 +65,10 @@ header h1 {
   margin-bottom: 1rem; }
 
 /* Game Board */
+/* General */
+.display-none {
+  display: none; }
+
+/* General */
 
 /*# sourceMappingURL=styles.css.map */
