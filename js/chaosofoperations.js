@@ -8,6 +8,8 @@ var currentPlayer = 1;
 var playerOneColor;
 var playerTwoColor;
 
+var playerSwitchAnimationInterval = 300;
+
 $(document).ready
 (
 	function () 
@@ -172,23 +174,53 @@ function SwitchPlayers()
 	if ( currentPlayer === 1 )
 	{
 		currentPlayer = 2;
-		$(".player-2").insertBefore($(".player-1"));
 		$("body").css("background-color", playerTwoColor);
 		$("header").css("background-color", playerOneColor);
 		$("header h1").css("color", playerTwoColor);
+		SwitchPlayersElements();
 	}
 	else if ( currentPlayer === 2 )
 	{
 		currentPlayer = 1;
-		$(".player-1").insertBefore($(".player-2"));
 		$("body").css("background-color", playerOneColor);
 		$("header").css("background-color", playerTwoColor);
 		$("header h1").css("color", playerOneColor);
+		SwitchPlayersElements();
 	}
 	else
 	{
 		alert("WHAT YOU DID? WHAT YOU DID NAAAAH? AHM GONNA BEAT YOU WITH MAH FIIIIISTS!");
 	}
+}
+
+function SwitchPlayersElements()
+{
+	var playerOneHeight = $(".player-1").outerHeight();
+	var playerOneIncOrDec, playerTwoIncOrDec;
+	
+	if (parseInt($(".player-1").css("top").replace("px", "")) > 0)
+	{
+		playerOneIncOrDec = "-=";
+		playerTwoIncOrDec = "+=";
+	}
+	else
+	{
+		playerOneIncOrDec = "+=";
+		playerTwoIncOrDec = "-=";
+	}
+	
+	$(".player-1").animate(
+		{
+			"top": playerOneIncOrDec + playerOneHeight
+		},
+		playerSwitchAnimationInterval
+	);
+	$(".player-2").animate(
+		{
+			"top": playerTwoIncOrDec + playerOneHeight
+		},
+		playerSwitchAnimationInterval
+	);
 }
 
 function NextTurn()

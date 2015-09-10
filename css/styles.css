@@ -38,6 +38,10 @@ header h1 {
   color: #000000;
   padding: 1rem; }
 
+.player-1, .player-2 {
+  position: relative;
+  top: 0; }
+
 .tile {
   display: inline;
   cursor: pointer;
