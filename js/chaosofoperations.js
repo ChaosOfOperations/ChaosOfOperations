@@ -15,13 +15,12 @@ $(document).ready
 
 function NewGame()
 {
-	//Build the hand for player 1
 	GenerateNumberTilesP1();
 	GenerateNumberTilesP2();
-	//Generate the operator tiles
 	GenerateOperatorTilesP1();
 	GenerateOperatorTilesP2();
 	SetTileEventListeners();
+	EvaluateBothPlayerEquations();
 }
 
 function GetRandomTileNumber()
@@ -57,6 +56,7 @@ function GenerateOperatorTilesP1()
 
 function GenerateOperatorTilesP2()
 {
+	//clone player 1 operator tiles into player 2 operator tiles
 	$(".player-2 .operator-tiles").append($(".player-1 .operator-tiles").html());
 }
 
@@ -156,6 +156,30 @@ function SwitchPlayers()
 function NextTurn()
 {
 	SwitchPlayers();
+	EvaluateBothPlayerEquations();
 	DisableTileEventListeners();
 	SetTileEventListeners();
+}
+
+function EvaluateBothPlayerEquations()
+{
+	EvaluatePlayerEquation(1);
+	EvaluatePlayerEquation(2);
+}
+
+function EvaluatePlayerEquation(playerNumber)
+{
+	var expressionElements = $(".player-" + playerNumber + " .played-tiles");
+	var humanReadableExpression = "";
+	expressionElements.each(
+		function() {
+			humanReadableExpression += this.textContent.replace(/\s/g, "");
+		}
+	);
+	expressionToEvaluate = humanReadableExpression;
+	expressionToEvaluate = expressionToEvaluate.replace(/×/g, "*");
+	expressionToEvaluate = expressionToEvaluate.replace(/÷/g, "/");
+	expressionToEvaluate = expressionToEvaluate.replace(/mod/g, "%");
+	expressionToEvaluate = expressionToEvaluate.replace(/(\d+)\^(\d+)/g, "Math.pow($1, $2)");
+	$(".player-" + playerNumber + " .equation-evaluation").html("= " + eval(expressionToEvaluate));
 }
