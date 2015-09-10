@@ -16,8 +16,8 @@ $(document).ready
 	{
 		NewGame();
 		PopulatePlayerNames();
-		playerOneColor = $("body").css("background-color");
-		playerTwoColor = $("header").first().css("background-color");
+		SetPlayerColors();
+		SetP2TopToP1Height();
 	}
 );
 
@@ -25,6 +25,12 @@ function PopulatePlayerNames()
 {
 	$(".player-2-name").html(prompt("Player One, Enter Your Name. (This player has the advantage.)"));
 	$(".player-1-name").html(prompt("Player Two, Enter Your Name."));
+}
+
+function SetPlayerColors()
+{
+	playerOneColor = $("body").css("background-color");
+	playerTwoColor = $("header").first().css("background-color");
 }
 
 function NewGame()
@@ -35,6 +41,7 @@ function NewGame()
 	GenerateOperatorTilesP2();
 	SetTileEventListeners();
 	EvaluateBothPlayerEquations();
+	SetP2TopToP1Height();
 }
 
 function GetRandomTileNumber()
@@ -195,28 +202,30 @@ function SwitchPlayers()
 
 function SwitchPlayersElements()
 {
+	var playerOneHeight = $(".player-1").outerHeight();
 	var playerTwoHeight = $(".player-2").outerHeight();
 	var playerOneTop, playerTwoTop;
 	
 	if (parseInt($(".player-1").css("top").replace("px", "")) > 0)
 	{
-		playerOneTop = playerTwoTop = 0;
+		playerOneTop = 0;
+		playerTwoTop = playerOneHeight;
 	}
 	else
 	{
-		playerOneTop = "+=" + playerTwoHeight;
-		playerTwoTop = "-=" + playerTwoHeight;
+		playerOneTop = playerTwoHeight;
+		playerTwoTop = 0;
 	}
 	
-	$(".player-1").animate(
+	AnimateSwitchPlayerElement(1, playerOneTop);
+	AnimateSwitchPlayerElement(2, playerTwoTop);
+}
+
+function AnimateSwitchPlayerElement(whichPlayer, newTopValue)
+{
+	$(".player-" + whichPlayer).animate(
 		{
-			"top": playerOneTop
-		},
-		playerSwitchAnimationInterval
-	);
-	$(".player-2").animate(
-		{
-			"top": playerTwoTop
+			"top": newTopValue
 		},
 		playerSwitchAnimationInterval
 	);
@@ -252,4 +261,9 @@ function EvaluatePlayerEquation(playerNumber)
 	expressionToEvaluate = expressionToEvaluate.replace(/(\d+)\^(\d+)/g, "Math.pow($1, $2)");
 	expressionToEvaluate = expressionToEvaluate.replace(/Math.pow\((.+?)\)\^(\d+)/g, "Math.pow(Math.pow($1), $2)");
 	$(".player-" + playerNumber + " .equation-evaluation").html("= " + eval(expressionToEvaluate));
+}
+
+function SetP2TopToP1Height()
+{
+	$(".player-2").css("top", $(".player-1").outerHeight());
 }
