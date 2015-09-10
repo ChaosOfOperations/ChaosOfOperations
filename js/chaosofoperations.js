@@ -74,7 +74,7 @@ function SetTileEventListeners()
 
 function SetUnplayedTileEventListeners(tileType)
 {
-	$(".player-" + currentPlayer + " ." + tileType + "-tiles .tile").click(
+	$("." + tileType + "-tiles .tile").click(
 		function ()
 		{
 			UserSelectTile(tileType, this);
@@ -90,12 +90,11 @@ function UserSelectTile(tileType, tileElement)
 
 function SetPlayedTilesEventListeners()
 {
-	$(".player-" + currentPlayer + " .played-tiles .number-tile").hover(
+	$(".played-tiles .number-tile").hover(
 		DisplayPossibleMoves
 	);
 }
 
-//TODO refactor this function
 function DisplayPossibleMoves()
 {
 	$(".move-preview").remove();
