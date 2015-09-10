@@ -91,7 +91,7 @@ function UserSelectTile(tileType, tileElement)
 
 function SetPlayedTilesEventListeners()
 {
-	$(".played-tiles .number-tile").hover(
+	$(".played-tiles .number-tile").click(
 		DisplayPossibleMoves
 	);
 }
