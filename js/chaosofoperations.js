@@ -195,29 +195,28 @@ function SwitchPlayers()
 
 function SwitchPlayersElements()
 {
-	var playerOneHeight = $(".player-1").outerHeight();
-	var playerOneIncOrDec, playerTwoIncOrDec;
+	var playerTwoHeight = $(".player-2").outerHeight();
+	var playerOneTop, playerTwoTop;
 	
 	if (parseInt($(".player-1").css("top").replace("px", "")) > 0)
 	{
-		playerOneIncOrDec = "-=";
-		playerTwoIncOrDec = "+=";
+		playerOneTop = playerTwoTop = 0;
 	}
 	else
 	{
-		playerOneIncOrDec = "+=";
-		playerTwoIncOrDec = "-=";
+		playerOneTop = "+=" + playerTwoHeight;
+		playerTwoTop = "-=" + playerTwoHeight;
 	}
 	
 	$(".player-1").animate(
 		{
-			"top": playerOneIncOrDec + playerOneHeight
+			"top": playerOneTop
 		},
 		playerSwitchAnimationInterval
 	);
 	$(".player-2").animate(
 		{
-			"top": playerTwoIncOrDec + playerOneHeight
+			"top": playerTwoTop
 		},
 		playerSwitchAnimationInterval
 	);
