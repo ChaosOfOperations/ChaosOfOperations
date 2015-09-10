@@ -85,6 +85,7 @@ function SetUnplayedTileEventListeners(tileType)
 function UserSelectTile(tileType, tileElement)
 {
 	$(".player-" + currentPlayer + " ." + tileType + "-tiles .tile").removeClass("selected");
+	$(".played-tiles .selected").remove();
 	$(tileElement).addClass( "selected" );
 }
 
