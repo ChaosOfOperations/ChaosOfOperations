@@ -74,7 +74,7 @@ function SetTileEventListeners()
 
 function SetUnplayedTileEventListeners(tileType)
 {
-	$("." + tileType + "-tiles .tile").click(
+	$(".player-" + currentPlayer + " ." + tileType + "-tiles .tile").click(
 		function ()
 		{
 			UserSelectTile(tileType, this);
