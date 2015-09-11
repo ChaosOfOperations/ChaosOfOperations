@@ -76,16 +76,27 @@ header h1
 	cursor: pointer
 	padding-left: $standard-spacing-tiny
 	padding-right: $standard-spacing-tiny
-
-.tile.selected
 	border-style: solid
 	border-width: $standard-border-thin
+	border-color: transparent
+
+.tile.selected
+	padding-left: $standard-spacing-small
+	padding-right: $standard-spacing-small
 
 .player-1 .tile.selected
 	border-color: $player-1-foreground
 
 .player-2 .tile.selected
 	border-color: $player-2-foreground
+
+.move-preview-before.number-tile, .move-preview-after.operator-tile
+	border-right-width: 0
+	padding-right: $standard-spacing-tiny
+
+.move-preview-before.operator-tile, .move-preview-after.number-tile
+	border-left-width: 0
+	padding-left: $standard-spacing-tiny
 
 .number-tiles, .operator-tiles
 	clear: left

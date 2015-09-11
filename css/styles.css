@@ -47,17 +47,28 @@ header h1 {
   float: left;
   cursor: pointer;
   padding-left: 0.4rem;
-  padding-right: 0.4rem; }
+  padding-right: 0.4rem;
+  border-style: solid;
+  border-width: 0.15rem;
+  border-color: transparent; }
 
 .tile.selected {
-  border-style: solid;
-  border-width: 0.15rem; }
+  padding-left: 1rem;
+  padding-right: 1rem; }
 
 .player-1 .tile.selected {
   border-color: #ffffff; }
 
 .player-2 .tile.selected {
   border-color: #000000; }
+
+.move-preview-before.number-tile, .move-preview-after.operator-tile {
+  border-right-width: 0;
+  padding-right: 0.4rem; }
+
+.move-preview-before.operator-tile, .move-preview-after.number-tile {
+  border-left-width: 0;
+  padding-left: 0.4rem; }
 
 .number-tiles, .operator-tiles {
   clear: left; }
