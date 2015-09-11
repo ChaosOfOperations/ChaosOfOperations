@@ -268,11 +268,11 @@ function NextTurn()
 
 function EvaluateBothPlayerEquations()
 {
-	DisplayEvaluatedPlayerEquation(1, EvaluatePlayerEquation(1));
-	DisplayEvaluatedPlayerEquation(2, EvaluatePlayerEquation(2));
+	EvaluateAndDisplayPlayerEquation(1, GetPlayerEquationToEvaluate(1));
+	EvaluateAndDisplayPlayerEquation(2, GetPlayerEquationToEvaluate(2));
 }
 
-function EvaluatePlayerEquation(playerNumber)
+function GetPlayerEquationToEvaluate(playerNumber)
 {
 	var expressionElements = $(".player-" + playerNumber + " .played-tiles");
 	var humanReadableExpression = "";
@@ -290,7 +290,7 @@ function EvaluatePlayerEquation(playerNumber)
 	return expressionToEvaluate;
 }
 
-function DisplayEvaluatedPlayerEquation(playerNumber, equationToEvaluate)
+function EvaluateAndDisplayPlayerEquation(playerNumber, equationToEvaluate)
 {
 	$(".player-" + playerNumber + " .equation-evaluation").html("= " + eval(equationToEvaluate));
 }
@@ -300,21 +300,34 @@ function HandleWinCondition()
 	var lastTileHasBeenPlayed = $(".player-2 .number-tiles .tile").length == 0;
 	if (lastTileHasBeenPlayed)
 	{
-		$(".player-" + WhichPlayerIsWinning() + " .winner").removeClass("display-none");
+		var winningPlayer = WhichPlayerIsWinning();
+		if (winningPlayer == 0)
+		{
+			$(".player-1 .winner, .player-2 .winner").removeClass("display-none");
+		}
+		else
+		{
+			$(".player-" + winningPlayer + " .winner").removeClass("display-none");
+		}
 		AudioWinGame();
 	}
 }
 
 function WhichPlayerIsWinning()
 {
-	var playerOneIsWinning = eval(EvaluatePlayerEquation(1) + ">" + EvaluatePlayerEquation(2));
-	if (playerOneIsWinning)
+	var playerOneEquation = GetPlayerEquationToEvaluate(1);
+	var playerTwoEquation = GetPlayerEquationToEvaluate(2);
+	if (eval(playerOneEquation + ">" + playerTwoEquation))
 	{
 		return 1;
 	}
-	else
+	else if (eval(playerOneEquation + "<" + playerTwoEquation))
 	{
 		return 2;
+	}
+	else
+	{
+		return 0;
 	}
 }
 
