@@ -20,17 +20,23 @@ $(document).ready
 	{
 		SetDebugState();
 		NewGame();
-		if (!debug) {
-			PopulatePlayerNames();
-		}
+		PopulatePlayerNames();
 		SetPlayerColors();
 	}
 );
 
 function PopulatePlayerNames()
 {
-	$(".player-1-name").html(prompt("Enter the name of the player with the most mathematical knowledge."));
-	$(".player-2-name").html(prompt("Enter the name of the player with the least mathematical knowledge."));
+	if (debug)
+	{
+		$(".player-1-name").html("Cody");
+		$(".player-2-name").html("Bennett");
+	}
+	else
+	{
+		$(".player-1-name").html(prompt("Enter the name of the player with the most mathematical knowledge."));
+		$(".player-2-name").html(prompt("Enter the name of the player with the least mathematical knowledge."));
+	}
 }
 
 function SetPlayerColors()
