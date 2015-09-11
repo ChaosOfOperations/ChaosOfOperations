@@ -4,7 +4,8 @@
   font-family: Walkway;
   src: url("../assets/fonts/walkway-semibold.ttf"); }
 body, h1, .game-board {
-  font-family: "Walkway"; }
+  font-family: "Walkway";
+  line-height: 100%; }
 
 /* Font Face */
 /* General Page Layout */
@@ -15,6 +16,7 @@ header {
   padding-top: 4rem;
   padding-left: 1rem;
   padding-right: 1rem;
+  padding-bottom: 1rem;
   background-color: #ffffff; }
 
 header h1 {
@@ -46,15 +48,9 @@ header h1 {
   display: block;
   float: left;
   cursor: pointer;
-  padding-left: 0.4rem;
-  padding-right: 0.4rem;
   border-style: solid;
   border-width: 0.15rem;
   border-color: transparent; }
-
-.tile.selected {
-  padding-left: 1rem;
-  padding-right: 1rem; }
 
 .player-1 .tile.selected {
   border-color: #ffffff; }
@@ -71,12 +67,18 @@ header h1 {
   padding-left: 0.4rem; }
 
 .number-tiles, .operator-tiles {
+  padding-bottom: 0.4rem;
   clear: left; }
 
 .equation-evaluation {
-  margin-bottom: 1rem;
   padding-left: 1rem;
   float: left; }
+
+.player-name {
+  margin-bottom: 1rem; }
+
+.equation-evaluation {
+  margin-bottom: 2rem; }
 
 /* Game Board */
 /* General */

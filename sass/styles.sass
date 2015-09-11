@@ -7,6 +7,7 @@ $player-2-background: $player-1-foreground
 
 $standard-spacing-tiny: 0.4rem
 $standard-spacing-small: 1rem
+$standard-spacing-medium: 2rem
 $standard-spacing-large: 4rem
 
 $standard-border-thin: 0.15rem
@@ -26,6 +27,7 @@ $standard-font-large: 4rem
 
 body, h1, .game-board
 	font-family: "Walkway"
+	line-height: 100%
 
 /* Font Face */
 
@@ -39,6 +41,7 @@ header
 	padding-top: $standard-spacing-large
 	padding-left: $standard-spacing-small
 	padding-right: $standard-spacing-small
+	padding-bottom: $standard-spacing-small
 	background-color: $player-2-background
 
 header h1
@@ -74,15 +77,9 @@ header h1
 	display: block
 	float: left
 	cursor: pointer
-	padding-left: $standard-spacing-tiny
-	padding-right: $standard-spacing-tiny
 	border-style: solid
 	border-width: $standard-border-thin
 	border-color: transparent
-
-.tile.selected
-	padding-left: $standard-spacing-small
-	padding-right: $standard-spacing-small
 
 .player-1 .tile.selected
 	border-color: $player-1-foreground
@@ -99,12 +96,18 @@ header h1
 	padding-left: $standard-spacing-tiny
 
 .number-tiles, .operator-tiles
+	padding-bottom: $standard-spacing-tiny
 	clear: left
 
 .equation-evaluation
-	margin-bottom: $standard-spacing-small
 	padding-left: $standard-spacing-small
 	float: left
+
+.player-name
+	margin-bottom: $standard-spacing-small
+
+.equation-evaluation
+	margin-bottom: $standard-spacing-medium
 
 /* Game Board */
 
