@@ -106,7 +106,7 @@ function SetUnplayedTileEventListeners(tileType)
 		{
 			UserSelectTile(tileType, this);
 		}
-	).hover(AudioMouseOver);
+	).mouseenter(AudioMouseOver);
 }
 
 function UserSelectTile(tileType, tileElement)
