@@ -71,7 +71,8 @@ header h1
 	width: 100%
 
 .tile
-	display: inline
+	display: block
+	float: left
 	cursor: pointer
 	padding-left: $standard-spacing-tiny
 	padding-right: $standard-spacing-tiny
@@ -86,11 +87,13 @@ header h1
 .player-2 .tile.selected
 	border-color: $player-2-foreground
 
-.played-tiles, .equation-evaluation
-	display: inline-block
+.number-tiles, .operator-tiles
+	clear: left
 
 .equation-evaluation
 	margin-bottom: $standard-spacing-small
+	padding-left: $standard-spacing-small
+	float: left
 
 /* Game Board */
 

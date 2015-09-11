@@ -43,7 +43,8 @@ header h1 {
   width: 100%; }
 
 .tile {
-  display: inline;
+  display: block;
+  float: left;
   cursor: pointer;
   padding-left: 0.4rem;
   padding-right: 0.4rem; }
@@ -58,11 +59,13 @@ header h1 {
 .player-2 .tile.selected {
   border-color: #000000; }
 
-.played-tiles, .equation-evaluation {
-  display: inline-block; }
+.number-tiles, .operator-tiles {
+  clear: left; }
 
 .equation-evaluation {
-  margin-bottom: 1rem; }
+  margin-bottom: 1rem;
+  padding-left: 1rem;
+  float: left; }
 
 /* Game Board */
 /* General */
