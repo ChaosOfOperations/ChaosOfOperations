@@ -50,11 +50,11 @@ button.player-2-theme:hover, button.player-2-theme:focus {
 /* General Page Layout */
 div.instructions {
   margin-top: 1rem;
-  margin-left: 1rem;
-  margin-right: 1rem; }
+  margin-left: 1rem; }
 
 div.instructions p {
-  font-size: 1.3rem; }
+  font-size: 1.3rem;
+  margin-right: 1rem; }
 
 div.instructions p strong {
   font-size: 2.5rem; }
