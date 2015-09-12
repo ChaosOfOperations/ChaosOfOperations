@@ -448,7 +448,13 @@ function SetDebugState()
 
 function PlayAudioFile(audioFileName)
 {
-	$(".game-audio").attr("src", soundsDirectory + audioFileName);
+	$(".game-audio").first().after($(".game-audio").first().clone().attr("src", soundsDirectory + audioFileName));
+	setTimeout(PopAudioElement, 50000);
+}
+
+function PopAudioElement()
+{
+	$(".game-audio").last().remove();
 }
 
 function AudioSelectObject()
