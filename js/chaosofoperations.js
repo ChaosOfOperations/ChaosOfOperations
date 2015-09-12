@@ -424,7 +424,14 @@ function ResetGameBoard()
 
 function DisplayInstructions()
 {
-	
+	if ($("div.instructions").css("display") === "none")
+	{
+		$("div.instructions").slideDown();
+	}
+	else
+	{
+		$("div.instructions").slideUp();
+	}
 }
 
 

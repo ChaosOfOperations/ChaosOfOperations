@@ -33,11 +33,11 @@ header button {
   background-color: #ffffff;
   color: #000000; }
 
-.player-1-theme h1 {
-  color: #ffffff; }
-
-.player-2-theme h1 {
+.player-1-theme header h1 {
   color: #000000; }
+
+.player-2-theme header h1 {
+  color: #ffffff; }
 
 button.player-1-theme:hover, button.player-1-theme:focus {
   background-color: #ffffff;
@@ -48,6 +48,12 @@ button.player-2-theme:hover, button.player-2-theme:focus {
   color: #ffffff; }
 
 /* General Page Layout */
+div.instructions p {
+  font-size: 1.3rem; }
+
+div.instructions p strong {
+  font-size: 2.5rem; }
+
 /* Game Board */
 .game-board {
   font-size: 2.5rem;

@@ -14,7 +14,7 @@ $standard-border-thin: 0.15rem
 $standard-border-medium: 1rem
 $standard-border-thick: 2rem
 
-$standard-font-small: 1rem
+$standard-font-small: 1.3rem
 $standard-font-medium: 2.5rem
 $standard-font-large: 4rem
 
@@ -58,11 +58,11 @@ header button
 	background-color: $player-2-background
 	color: $player-2-foreground
 
-.player-1-theme h1
-	color: $player-1-foreground
-
-.player-2-theme h1
+.player-1-theme header h1
 	color: $player-2-foreground
+
+.player-2-theme header h1
+	color: $player-1-foreground
 
 button.player-1-theme:hover, button.player-1-theme:focus
 	background-color: $player-2-background
@@ -75,6 +75,11 @@ button.player-2-theme:hover, button.player-2-theme:focus
 /* General Page Layout */
 
 
+div.instructions p
+	font-size: $standard-font-small
+
+div.instructions p strong
+	font-size: $standard-font-medium
 
 /* Game Board */
 
