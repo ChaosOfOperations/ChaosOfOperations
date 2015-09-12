@@ -57,7 +57,7 @@ function NewGame()
 
 function GetRandomTileNumber()
 {
-	var range = MAX_NUMBER_VALUE - MIN_NUMBER_VALUE;
+	var range = MAX_NUMBER_VALUE - MIN_NUMBER_VALUE + 1;
 	return parseInt(Math.random() * range + MIN_NUMBER_VALUE);
 }
 
