@@ -50,7 +50,8 @@ button.player-2-theme:hover, button.player-2-theme:focus {
 /* General Page Layout */
 div.instructions {
   margin-top: 1rem;
-  margin-left: 1rem; }
+  margin-left: 1rem;
+  margin-right: 1rem; }
 
 div.instructions p {
   font-size: 1.3rem; }
@@ -112,7 +113,7 @@ div.instructions p strong {
   padding-bottom: 0.4rem;
   clear: left; }
 
-.number-tiles .tile, .operator-tiles .tile {
+.number-tiles .tile, .operator-tiles .tile, .played-tiles .selected {
   cursor: pointer; }
 
 .equation-evaluation {
