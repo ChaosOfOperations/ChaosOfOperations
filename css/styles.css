@@ -1,26 +1,51 @@
 /* P1 and P2 colors are inverted */
-/* Font Face */
+/* Fonts */
 @font-face {
   font-family: Walkway;
   src: url("../assets/fonts/walkway-semibold.ttf"); }
-body, h1, .game-board {
+body, h1, button, .game-board {
   font-family: "Walkway";
   line-height: 100%; }
 
-/* Font Face */
-/* General Page Layout */
-body {
-  background-color: #000000; }
+button {
+  font-weight: bold; }
 
+/* Fonts */
+/* General Page Layout */
 header {
-  padding-top: 4rem;
+  padding-top: 1rem;
   padding-left: 1rem;
   padding-right: 1rem;
   padding-bottom: 1rem;
   background-color: #ffffff; }
 
 header h1 {
+  clear: right; }
+
+header button {
+  margin-left: 1rem; }
+
+.player-1-theme {
+  background-color: #000000;
+  color: #ffffff; }
+
+.player-2-theme {
+  background-color: #ffffff;
   color: #000000; }
+
+.player-1-theme h1 {
+  color: #ffffff; }
+
+.player-2-theme h1 {
+  color: #000000; }
+
+button.player-1-theme:hover, button.player-1-theme:focus {
+  background-color: #ffffff;
+  color: #000000; }
+
+button.player-2-theme:hover, button.player-2-theme:focus {
+  background-color: #000000;
+  color: #ffffff; }
 
 /* General Page Layout */
 /* Game Board */

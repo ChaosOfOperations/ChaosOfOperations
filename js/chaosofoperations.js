@@ -7,9 +7,6 @@ var DEFAULT_OPERATORS = ["^", "&times;", "&times;", "&divide;", "&divide;", "mod
 
 var currentPlayer = 1;
 
-var playerOneColor;
-var playerTwoColor;
-
 var playerSwitchAnimationInterval = 300;
 
 var debug = false;
@@ -21,11 +18,15 @@ $(document).ready
 		SetDebugState();
 		NewGame();
 		PopulatePlayerNames();
-		
-		//Used for swapping the header and background colors when players are switched
-		SetPlayerColors();
+		SetButtonEventListeners();
 	}
 );
+
+function SetButtonEventListeners()
+{
+	$("button.new-game").click(NewGame);
+	$("button.instructions").click(DisplayInstructions);
+}
 
 function PopulatePlayerNames()
 {
@@ -41,14 +42,9 @@ function PopulatePlayerNames()
 	}
 }
 
-function SetPlayerColors()
-{
-	playerOneColor = $("body").css("background-color");
-	playerTwoColor = $("header").first().css("background-color");
-}
-
 function NewGame()
 {
+	ResetGameBoard();
 	GenerateNumberTilesP1();
 	GenerateNumberTilesP2();
 	GenerateOperatorTilesP1();
@@ -272,17 +268,17 @@ function SwitchPlayers()
 {
 	if (currentPlayer === 1)
 	{
-		$("body").css("background-color", playerTwoColor);
-		$("header").css("background-color", playerOneColor);
-		$("header h1").css("color", playerTwoColor);
+		$("body").removeClass("player-1-theme").addClass("player-2-theme");
+		$("header").removeClass("player-2-theme").addClass("player-1-theme");
+		$("header button").removeClass("player-1-theme").addClass("player-2-theme");
 		SwitchPlayersElements();
 		currentPlayer = 2;
 	}
 	else if (currentPlayer === 2)
 	{
-		$("body").css("background-color", playerOneColor);
-		$("header").css("background-color", playerTwoColor);
-		$("header h1").css("color", playerOneColor);
+		$("body").removeClass("player-2-theme").addClass("player-1-theme");
+		$("header").removeClass("player-1-theme").addClass("player-2-theme");
+		$("header button").removeClass("player-2-theme").addClass("player-1-theme");
 		SwitchPlayersElements();
 		currentPlayer = 1;
 	}
@@ -413,6 +409,22 @@ function WhichPlayerIsWinning()
 	{
 		return 0;
 	}
+}
+
+function ResetGameBoard()
+{
+	$(".player-1 .played-tiles").html($(".player-1 .start-tile"));
+	$(".player-2 .played-tiles").html($(".player-2 .start-tile"));
+	$(".number-tiles, .operator-tiles").html("");
+	if (currentPlayer == 2)
+	{
+		SwitchPlayers();
+	}
+}
+
+function DisplayInstructions()
+{
+	
 }
 
 

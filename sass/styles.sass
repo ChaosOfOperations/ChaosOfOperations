@@ -19,33 +19,58 @@ $standard-font-medium: 2.5rem
 $standard-font-large: 4rem
 
 
-/* Font Face */
+/* Fonts */
 
 @font-face
 	font-family: Walkway
 	src: url('../assets/fonts/walkway-semibold.ttf')
 
-body, h1, .game-board
+body, h1, button, .game-board
 	font-family: "Walkway"
 	line-height: 100%
 
-/* Font Face */
+button
+	font-weight: bold
+
+/* Fonts */
 
 
 /* General Page Layout */
 
-body
-	background-color: $player-1-background
-
 header
-	padding-top: $standard-spacing-large
+	padding-top: $standard-spacing-small
 	padding-left: $standard-spacing-small
 	padding-right: $standard-spacing-small
 	padding-bottom: $standard-spacing-small
 	background-color: $player-2-background
 
 header h1
+	clear: right
+
+header button
+	margin-left: $standard-spacing-small
+
+.player-1-theme
+	background-color: $player-1-background
+	color: $player-1-foreground
+
+.player-2-theme
+	background-color: $player-2-background
 	color: $player-2-foreground
+
+.player-1-theme h1
+	color: $player-1-foreground
+
+.player-2-theme h1
+	color: $player-2-foreground
+
+button.player-1-theme:hover, button.player-1-theme:focus
+	background-color: $player-2-background
+	color: $player-2-foreground
+
+button.player-2-theme:hover, button.player-2-theme:focus
+	background-color: $player-1-background
+	color: $player-1-foreground
 
 /* General Page Layout */
 
