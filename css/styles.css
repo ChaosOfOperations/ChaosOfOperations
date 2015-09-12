@@ -64,7 +64,7 @@ div.instructions p strong {
   font-size: 2.5rem;
   position: relative; }
 
-.player-1-name, .player-2-name {
+.player-1-name, .player-2-name, .winner {
   padding-left: 0.4rem; }
 
 .player-1 {

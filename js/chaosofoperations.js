@@ -7,7 +7,7 @@ var DEFAULT_OPERATORS = ["^", "&times;", "&times;", "&divide;", "&divide;", "mod
 
 var currentPlayer = 1;
 
-var playerSwitchAnimationInterval = 300;
+var playerSwitchAnimationDuration = 300;
 
 var debug = false;
 
@@ -324,7 +324,7 @@ function SwitchPlayersElements()
 			$(".player-" + currentPlayer).insertBefore($(".player-" + (currentPlayer%2+1)));
 			$(".player-1, .player-2").css("position", "initial");
 		},
-		playerSwitchAnimationInterval
+		playerSwitchAnimationDuration
 	);
 }
 
@@ -334,7 +334,7 @@ function AnimateSwitchPlayerElement(playerNumber, newTopValue)
 		{
 			"top": newTopValue
 		},
-		playerSwitchAnimationInterval
+		playerSwitchAnimationDuration
 	);
 }
 
@@ -390,13 +390,13 @@ function HandleWinCondition()
 	var winningPlayer = WhichPlayerIsWinning();
 	if (winningPlayer == 0)
 	{
-		$(".player-1 .winner, .player-2 .winner").removeClass("display-none");
+		$(".player-1 .winner, .player-2 .winner").removeClass("display-none").html("It's A Tie");
 	}
 	else
 	{
-		$(".player-" + winningPlayer + " .winner").removeClass("display-none");
+		$(".player-" + winningPlayer + " .winner").removeClass("display-none").html("WINNER");
+		AudioWinGame();
 	}
-	AudioWinGame();
 }
 
 function WhichPlayerIsWinning()
