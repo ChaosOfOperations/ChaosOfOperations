@@ -52,6 +52,7 @@ function NewGame()
 	SetTileEventListeners();
 	EvaluateBothPlayerEquations();
 	AudioStartGame();
+	$(".winner").addClass("display-none");
 }
 
 function GetRandomTileNumber()
