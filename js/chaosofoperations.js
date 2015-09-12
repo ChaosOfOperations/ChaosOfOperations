@@ -375,22 +375,27 @@ function EvaluateAndDisplayPlayerEquation(playerNumber, equationToEvaluate)
 	$(".player-" + playerNumber + " .equation-evaluation").html("= " + eval(equationToEvaluate));
 }
 
+function CheckIfLastTileHasBeenPlayed()
+{
+	return $(".player-2 .number-tiles .tile").length == 0;
+}
+
 function HandleWinCondition()
 {
-	var lastTileHasBeenPlayed = $(".player-2 .number-tiles .tile").length == 0;
-	if (lastTileHasBeenPlayed)
+	if (!CheckIfLastTileHasBeenPlayed())
 	{
-		var winningPlayer = WhichPlayerIsWinning();
-		if (winningPlayer == 0)
-		{
-			$(".player-1 .winner, .player-2 .winner").removeClass("display-none");
-		}
-		else
-		{
-			$(".player-" + winningPlayer + " .winner").removeClass("display-none");
-		}
-		AudioWinGame();
+		return;
 	}
+	var winningPlayer = WhichPlayerIsWinning();
+	if (winningPlayer == 0)
+	{
+		$(".player-1 .winner, .player-2 .winner").removeClass("display-none");
+	}
+	else
+	{
+		$(".player-" + winningPlayer + " .winner").removeClass("display-none");
+	}
+	AudioWinGame();
 }
 
 function WhichPlayerIsWinning()
@@ -441,7 +446,7 @@ function SetDebugState()
 	{
 		debug = true;
 		DEFAULT_OPERATORS = ["+", "^"];
-		PlayAudioFile = function (audioFileName) {};
+		//PlayAudioFile = function (audioFileName) {};
 	}
 }
 
@@ -474,6 +479,10 @@ function AudioWinGame()
 
 function AudioPlayPiece()
 {
+	if (CheckIfLastTileHasBeenPlayed())
+	{
+		return;
+	}
 	PlayAudioFile("highlight_pleasant_03.wav");
 }
 
@@ -481,9 +490,3 @@ function AudioStartGame()
 {
 	PlayAudioFile("highlight_pleasant_06.wav");
 }
-
-function AudioSwitchPlayers()
-{
-	PlayAudioFile("texture_whoosh_02_medium_01.wav");
-}
-
