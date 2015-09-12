@@ -47,7 +47,6 @@ header h1 {
 .tile {
   display: block;
   float: left;
-  cursor: pointer;
   border-style: solid;
   border-width: 0.15rem;
   border-color: transparent; }
@@ -58,20 +57,32 @@ header h1 {
 .player-2 .tile.selected {
   border-color: #000000; }
 
-.move-preview-before.number-tile, .move-preview-after.operator-tile {
+.click-move-preview-before.number-tile, .click-move-preview-after.operator-tile {
   border-right-width: 0;
   padding-right: 0.4rem; }
 
-.move-preview-before.operator-tile, .move-preview-after.number-tile {
+.click-move-preview-before.operator-tile, .click-move-preview-after.number-tile {
   border-left-width: 0;
   padding-left: 0.4rem; }
+
+.move-preview-hover-listener {
+  float: left;
+  width: 0.4rem;
+  height: 2.5rem; }
+
+.tile-value {
+  float: left; }
 
 .number-tiles, .operator-tiles {
   padding-bottom: 0.4rem;
   clear: left; }
 
+.number-tiles .tile, .operator-tiles .tile {
+  cursor: pointer; }
+
 .equation-evaluation {
-  padding-left: 1rem;
+  padding-left: 0.4rem;
+  padding-top: 0.15rem;
   float: left; }
 
 .player-name {
@@ -84,6 +95,12 @@ header h1 {
 /* General */
 .display-none {
   display: none; }
+
+.no-border-right {
+  border-right: none; }
+
+.no-border-left {
+  border-left: none; }
 
 /* General */
 

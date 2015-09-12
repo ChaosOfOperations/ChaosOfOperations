@@ -21,6 +21,8 @@ $(document).ready
 		SetDebugState();
 		NewGame();
 		PopulatePlayerNames();
+		
+		//Used for swapping the header and background colors when players are switched
 		SetPlayerColors();
 	}
 );
@@ -66,13 +68,21 @@ function GenerateNumberTilesP1()
 {
 	for (var i = 0; i < DEFAULT_OPERATORS.length; i++)
 	{
-		$(".player-1 .number-tiles").append("<div class=\"tile number-tile\">" + GetRandomTileNumber() + "</div>");
+		$(".player-1 .number-tiles").append(
+			"<div class=\"tile number-tile\">"
+				+ GetHoverMovePreviewDivHTML("number-before")
+				+ "<div class=\"tile-value\">"
+				+ GetRandomTileNumber()
+				+ "</div>"
+				+ GetHoverMovePreviewDivHTML("number-after")
+				+ "</div>"
+		);
 	}
 }
 
 function GenerateNumberTilesP2()
 {
-	//clone player 1 number tiles into player 2 number tiles
+	//Clone player 1 number tiles into player 2 number tiles
 	$(".player-2 .number-tiles").append($(".player-1 .number-tiles").html());
 }
 
@@ -82,20 +92,30 @@ function GenerateOperatorTilesP1()
 		DEFAULT_OPERATORS, 
 		function (key, value)
 		{
-			$(".player-1 .operator-tiles").append("<div class=\"tile operator-tile\">" + value + "</div>");
+			$(".player-1 .operator-tiles").append(
+				"<div class=\"tile operator-tile\">"
+					+ GetHoverMovePreviewDivHTML("operator-before")
+					+ "<div class=\"tile-value\">"
+					+ value
+					+ "</div>"
+					+ GetHoverMovePreviewDivHTML("operator-after")
+					+ "</div>"
+			);
 		}
 	);
 }
 
 function GenerateOperatorTilesP2()
 {
-	//clone player 1 operator tiles into player 2 operator tiles
+	//Clone player 1 operator tiles into player 2 operator tiles
 	$(".player-2 .operator-tiles").append($(".player-1 .operator-tiles").html());
 }
 
 function DisableTileEventListeners()
 {
-	$(".tile").off( "click" );
+	$(".tile").off("click");
+	$(".tile").off("mouseenter");
+	$(".move-preview-hover-listener").off("mouseenter");
 }
 
 function SetTileEventListeners()
@@ -110,52 +130,51 @@ function SetUnplayedTileEventListeners(tileType)
 	$(".player-" + currentPlayer + " ." + tileType + "-tiles .tile").click(
 		function ()
 		{
-			UserSelectTile(tileType, this);
+			UserSelectUnplayedTile(tileType, this);
 		}
 	).mouseenter(AudioMouseOver);
 }
 
-function UserSelectTile(tileType, tileElement)
+function UserSelectUnplayedTile(tileType, tileElement)
 {
 	$(".player-" + currentPlayer + " ." + tileType + "-tiles .tile").removeClass("selected");
 	$(".played-tiles .selected").remove();
-	$(tileElement).addClass( "selected" );
+	$(tileElement).addClass("selected");
 	AudioSelectObject();
 }
 
 function SetPlayedTilesEventListeners()
 {
 	$(".played-tiles .number-tile").click(
-		DisplayPossibleMoves
+		UserDisplayClickMovePreviews
+	);
+	$(".played-tiles .move-preview-hover-listener").mouseenter(
+		UserDisplayHoverMovePreview
 	);
 }
 
-function DisplayPossibleMoves()
+function UserDisplayClickMovePreviews()
 {
 	if (!CurrentPlayerSelectedTwoTiles())
 	{
 		return;
 	}
 	
-	$(".move-preview").remove();
-	var previewNumberBefore = $(".player-" + currentPlayer + " .number-tile.selected").clone();
-	var previewOperatorBefore = $(".player-" + currentPlayer + " .operator-tile.selected").clone();
-	$(previewNumberBefore).addClass("move-preview");
-	$(previewOperatorBefore).addClass("move-preview");
-	var previewNumberAfter = previewNumberBefore.clone();
-	var previewOperatorAfter = previewOperatorBefore.clone();
-	$(previewNumberBefore).addClass("move-preview-before");
-	$(previewOperatorBefore).addClass("move-preview-before");
-	$(previewNumberAfter).addClass("move-preview-after");
-	$(previewOperatorAfter).addClass("move-preview-after");
+	RemoveMovePreviews();
+	var previewNumberBefore = $(".player-" + currentPlayer + " .number-tile.selected").clone().addClass("click-move-preview");
+	var previewOperatorBefore = $(".player-" + currentPlayer + " .operator-tile.selected").clone().addClass("click-move-preview");
+	var previewNumberAfter = previewNumberBefore.clone().addClass("click-move-preview-after");
+	var previewOperatorAfter = previewOperatorBefore.clone().addClass("click-move-preview-after");
+	$(previewNumberBefore).addClass("click-move-preview-before");
+	$(previewOperatorBefore).addClass("click-move-preview-before");
 	
-	$(this).before(previewNumberBefore);
-	$(this).before(previewOperatorBefore);
-	$(this).after(previewNumberAfter);
-	$(this).after(previewOperatorAfter);
+	$(this).before(previewNumberBefore)
+		.before(previewOperatorBefore)
+		.after(previewNumberAfter)
+		.after(previewOperatorAfter);
 	
-	SetMovePreviewClickEventListener("before");
-	SetMovePreviewClickEventListener("after");
+	SetClickMovePreviewEventListener("before");
+	SetClickMovePreviewEventListener("after");
 }
 
 function CurrentPlayerSelectedTwoTiles()
@@ -170,29 +189,88 @@ function CurrentPlayerSelectedTwoTiles()
 	return false;
 }
 
-function SetMovePreviewClickEventListener(beforeOrAfter)
+function SetClickMovePreviewEventListener(beforeOrAfter)
 {
-	$(".move-preview-" + beforeOrAfter).click(
+	$(".click-move-preview-" + beforeOrAfter).click(
 		function () 
 		{
-			UserChooseMove(beforeOrAfter);
+			UserChooseClickMovePreview(beforeOrAfter);
 		}
 	);
 }
 
-function UserChooseMove(beforeOrAfter)
+function UserChooseClickMovePreview(beforeOrAfter)
 {
-	$(".move-preview-" + beforeOrAfter).removeClass("selected");
-	$(".move-preview-" + beforeOrAfter).removeClass("move-preview");
-	$(".move-preview-" + beforeOrAfter).removeClass("move-preview-" + beforeOrAfter);
+	$(".click-move-preview-" + beforeOrAfter).removeClass("selected");
+	$(".click-move-preview-" + beforeOrAfter).removeClass("click-move-preview");
+	$(".click-move-preview-" + beforeOrAfter).removeClass("click-move-preview-" + beforeOrAfter);
 	$(".selected").remove();
 	AudioPlayPiece();
 	NextTurn();
 }
 
+function UserDisplayHoverMovePreview()
+{
+	if (!CurrentPlayerSelectedTwoTiles())
+	{
+		return;
+	}
+	
+	RemoveMovePreviews();
+	
+	var numberPreview = $(".player-" + currentPlayer + " .number-tile.selected").clone().addClass("hover-move-preview");
+	var operatorPreview = $(".player-" + currentPlayer + " .operator-tile.selected").clone().addClass("hover-move-preview");
+	
+	if ($(this).hasClass("move-preview-hover-listener-number-before"))
+	{
+		$(this.parentNode)
+			.before(numberPreview.addClass("no-border-right"))
+			.before(operatorPreview.addClass("no-border-left"));
+	}
+	else if ($(this).hasClass("move-preview-hover-listener-number-after"))
+	{
+		$(this.parentNode)
+			.after(numberPreview.addClass("no-border-left"))
+			.after(operatorPreview.addClass("no-border-right"));
+	}
+	else if ($(this).hasClass("move-preview-hover-listener-operator-before"))
+	{
+		$(this.parentNode)
+			.before(operatorPreview.addClass("no-border-right"))
+			.before(numberPreview.addClass("no-border-left"));
+	}
+	else if ($(this).hasClass("move-preview-hover-listener-operator-after"))
+	{
+		$(this.parentNode)
+			.after(operatorPreview.addClass("no-border-left"))
+			.after(numberPreview.addClass("no-border-right"));
+	}
+	
+	$(".hover-move-preview").click(UserChooseHoverMovePreview);
+}
+
+function UserChooseHoverMovePreview()
+{
+	$(".hover-move-preview").removeClass("selected");
+	$(".hover-move-preview").removeClass("hover-move-preview");
+	$(".selected").remove();
+	AudioPlayPiece();
+	NextTurn();
+}
+
+function GetHoverMovePreviewDivHTML(specificationClass)
+{
+	return "<div class=\"move-preview-hover-listener move-preview-hover-listener-" + specificationClass + "\"></div>";
+}
+
+function RemoveMovePreviews()
+{
+	$(".click-move-preview, .hover-move-preview").remove();
+}
+
 function SwitchPlayers()
 {
-	if ( currentPlayer === 1 )
+	if (currentPlayer === 1)
 	{
 		$("body").css("background-color", playerTwoColor);
 		$("header").css("background-color", playerOneColor);
@@ -200,7 +278,7 @@ function SwitchPlayers()
 		SwitchPlayersElements();
 		currentPlayer = 2;
 	}
-	else if ( currentPlayer === 2 )
+	else if (currentPlayer === 2)
 	{
 		$("body").css("background-color", playerOneColor);
 		$("header").css("background-color", playerTwoColor);
@@ -344,6 +422,7 @@ function SetDebugState()
 	{
 		debug = true;
 		DEFAULT_OPERATORS = ["+", "^"];
+		PlayAudioFile = function (audioFileName) {};
 	}
 }
 
