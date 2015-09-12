@@ -355,17 +355,17 @@ function PlayAudioFile(audioFileName)
 
 function AudioSelectObject()
 {
-	PlayAudioFile("dice_popper_01.wav");
+	PlayAudioFile("dice_popper_pop_01.wav");
 }
 
 function AudioMouseOver()
 {
-	PlayAudioFile("typewriter_type_03.wav");
+	PlayAudioFile("card_deal_01.wav");
 }
 
 function AudioWinGame()
 {
-	PlayAudioFile("guitar_wank_07.wav");
+	PlayAudioFile("gong_hit_short.wav");
 }
 
 function AudioPlayPiece()
