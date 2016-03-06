@@ -3,7 +3,7 @@ var soundsDirectory = "./assets/sounds/";
 var MAX_NUMBER_VALUE = 20;
 var MIN_NUMBER_VALUE = 1;
 
-var DEFAULT_OPERATORS = ["^", "&times;", "&times;", "&divide;", "&divide;", "mod", "+", "+", "-", "-"];
+var DEFAULT_OPERATORS = ["+", "+", "-", "-","&times;", "&times;", "&divide;", "&divide;", "^", "mod"];
 
 var currentPlayer = 1;
 
